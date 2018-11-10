@@ -1,0 +1,16 @@
+<mat-list *ngIf="givers.length">
+  <h3 mat-subheader>All givers</h3>
+  <mat-list-item *ngFor="let giver of givers; last as last">
+    <span class="giver-change" (click)="selectGiver.emit(giver)">
+      <mat-icon>text_format</mat-icon>
+    </span>
+    <span class="giver-change" (click)="deleteGiver.emit(giver)">
+      <mat-icon>delete_outline</mat-icon>
+    </span>
+    <span mat-line class="giver-item">
+      Giver: {{giver.name}}<span *ngIf="giver.spouse">, spouse: {{giver.spouse}}</span>
+    </span>
+    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+
+  </mat-list-item>
+</mat-list>

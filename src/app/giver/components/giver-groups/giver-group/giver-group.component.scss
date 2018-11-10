@@ -1,0 +1,12 @@
+.group-title {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+}
+
+.group-change {
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+}

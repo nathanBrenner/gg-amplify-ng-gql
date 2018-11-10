@@ -1,0 +1,10 @@
+<div>
+  <form (ngSubmit)="onSubmit($event)" [formGroup]="form">
+
+    <div *ngFor="let question of questions" class="form-row">
+      <gg-dynamic-form-question [question]="question" [form]="form"></gg-dynamic-form-question>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">submit</button>
+  </form>
+</div>

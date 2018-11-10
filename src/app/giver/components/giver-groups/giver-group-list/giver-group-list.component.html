@@ -1,0 +1,7 @@
+<div class="giver-list" *ngFor="let group of groups">
+  <gg-giver-group
+    [group]="group"
+    (deleteGiverGroup)="deleteGiverGroup.emit(group)"
+    (selectGiverGroup)="selectGiverGroup.emit(group)"
+  ></gg-giver-group>
+</div>

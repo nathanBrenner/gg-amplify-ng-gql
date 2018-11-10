@@ -1,0 +1,21 @@
+<div class="givers">
+  <mat-card>
+    <mat-card-title>Givers</mat-card-title>
+
+    <gg-giver-form
+      [givers]="givers"
+      [selectedGiver]="selectedGiver"
+      [showGiverList]="showGiverList"
+      (saveGiver)="saveGiver.emit($event)"
+      (toggleGiverList)="toggleGiverList.emit($event)"
+      (updateGiver)="updateGiver.emit($event)"
+    ></gg-giver-form>
+
+    <gg-giver-list
+      [givers]="givers"
+      (selectGiver)="selectGiver.emit($event)"
+      (deleteGiver)="deleteGiver.emit($event)"
+    ></gg-giver-list>
+
+  </mat-card>
+</div>

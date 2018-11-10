@@ -1,0 +1,15 @@
+<mat-list *ngIf="group.givers.length">
+  <div class="group-title">
+    <h3 mat-subheader>Group {{ group.name }}</h3>
+    <span class="group-change" (click)="selectGiverGroup.emit()">
+      <mat-icon>text_format</mat-icon>
+    </span>
+    <span class="group-change" (click)="deleteGiverGroup.emit()">
+      <mat-icon>delete_outline</mat-icon>
+    </span>
+  </div>
+  <mat-list-item *ngFor="let giver of group.givers; last as last">
+    <p mat-line>Giver: {{giver.name}}, assigned to: {{giver.assignedTo.name}}</p>
+    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+  </mat-list-item>
+</mat-list>

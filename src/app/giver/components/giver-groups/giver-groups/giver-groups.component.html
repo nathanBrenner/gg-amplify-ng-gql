@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-title>Giver Groups</mat-card-title>
+
+  <gg-giver-group-form
+    *ngIf="showGiverList"
+    [givers]="givers"
+    [selectedGiverGroup]="selectedGiverGroup"
+    (saveGroup)="saveGroup.emit($event)"
+    (updateGiverGroup)="updateGiverGroup.emit($event)"
+  ></gg-giver-group-form>
+
+  <gg-giver-group-list
+    [groups]="groups"
+    (deleteGiverGroup)="deleteGiverGroup.emit($event)"
+    (selectGiverGroup)="selectGiverGroup.emit($event)"
+  ></gg-giver-group-list>
+
+</mat-card>

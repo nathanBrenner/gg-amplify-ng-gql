@@ -1,0 +1,33 @@
+<mat-toolbar>
+  <div class="toolbar">
+    <span>GiftGiver</span>
+    <button mat-button (click)="logout()">logout</button>
+  </div>
+</mat-toolbar>
+<div class="givers-root">
+
+  <gg-givers
+    [givers]="givers"
+    [selectedGiver]="selectedGiver"
+    [showGiverList]="showGiverList"
+    (deleteGiver)="deleteGiver($event)"
+    (saveGiver)="addGiver($event)"
+    (selectGiver)="selectGiver($event)"
+    (toggleGiverList)="toggleGiverList($event)"
+    (updateGiver)="updateGiver($event)"
+  ></gg-givers>
+
+  <div>
+    <gg-giver-groups
+      [givers]="givers"
+      [groups]="groups"
+      [selectedGiverGroup]="selectedGiverGroup"
+      [showGiverList]="showGiverList"
+      (deleteGiverGroup)="deleteGiverGroup($event)"
+      (saveGroup)="saveGroup($event)"
+      (selectGiverGroup)="selectGiverGroup($event)"
+      (toggleGiverList)="toggleGiverList($event)"
+      (updateGiverGroup)="updateGiverGroup($event)"
+    ></gg-giver-groups>
+  </div>
+</div>
