@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "ggamplifynggql-20181110152637-authRole",
+            "UnauthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110152637-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110152637-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "ggamplifynggql-20181110152637-deployment",
+            "UnauthRoleName": "ggamplifynggql-20181110152637-unauthRole",
+            "StackName": "ggamplifynggql-20181110152637",
+            "StackId": "arn:aws:cloudformation:us-west-2:019811773954:stack/ggamplifynggql-20181110152637/12618a10-e540-11e8-825d-0a976e703682"
+        }
+    }
+}
