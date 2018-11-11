@@ -119,6 +119,13 @@
 					"authRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110154940-authRole"
 				}
 			}
+		},
+		"hostingS3AndCloudFront": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/hosting/template.json",
+				"Parameters": {}
+			}
 		}
 	},
 	"Outputs": {

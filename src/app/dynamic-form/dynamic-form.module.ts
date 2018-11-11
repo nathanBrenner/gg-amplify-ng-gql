@@ -9,11 +9,16 @@ import {
   MatSelectModule,
 } from '@angular/material';
 
-import components from './components';
-import services from './services';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './components/dynamic-form-question/dynamic-form-question.component';
+import { QuestionControlService } from './services/question-control.service';
+import { QuestionService } from './services/question.service';
 
 @NgModule({
-  declarations: [...components],
+  declarations: [
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -22,7 +27,13 @@ import services from './services';
     MatCheckboxModule,
     MatSelectModule,
   ],
-  providers: [ ...services ],
-  exports: [...components]
+  providers: [
+    QuestionControlService,
+    QuestionService,
+   ],
+  exports: [
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
+  ]
 })
 export class DynamicFormModule { }

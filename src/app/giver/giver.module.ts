@@ -18,14 +18,29 @@ import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 
-import { GiverRoutingModule } from './giver-routing.module';
+import { GiversComponent } from './components/givers/givers/givers.component';
+import { GiverListComponent } from './components/givers/giver-list/giver-list.component';
+import { GiverFormComponent } from './components/givers/giver-form/giver-form.component';
+import { GiverGroupsComponent } from './components/giver-groups/giver-groups/giver-groups.component';
+import { GiverGroupListComponent } from './components/giver-groups/giver-group-list/giver-group-list.component';
+import { GiverGroupFormComponent } from './components/giver-groups/giver-group-form/giver-group-form.component';
+import { GiverGroupComponent } from './components/giver-groups/giver-group/giver-group.component';
+import { GiverComponent } from './components/giver/giver.component';
+import { GiverService } from './services/giver.service';
+import { GiverGroupService } from './services/giver-group.service';
 
-import GiversComponents from './components';
-import Services from './services';
+import { GiverRoutingModule } from './giver-routing.module';
 
 @NgModule({
   declarations: [
-    ...GiversComponents
+    GiverComponent,
+    GiverGroupComponent,
+    GiverGroupFormComponent,
+    GiverGroupListComponent,
+    GiverGroupsComponent,
+    GiverFormComponent,
+    GiverListComponent,
+    GiversComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +59,8 @@ import Services from './services';
     AmplifyAngularModule
   ],
   providers: [
-    ...Services,
+    GiverGroupService,
+    GiverService,
     AmplifyService,
   ]
 })

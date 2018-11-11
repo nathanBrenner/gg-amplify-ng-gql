@@ -1,11 +1,11 @@
+import { GiverGroupService } from './../../services/giver-group.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AmplifyService } from 'aws-amplify-angular';
 import * as uuid from 'uuid/v4';
-
-import { Giver, GiverGroup } from '../../../giver';
-import { GiverService, GiverGroupService } from '../../services';
+import { Giver, GiverGroup } from 'src/app/giver';
+import { GiverService } from '../../services/giver.service';
 
 @Component({
   selector: 'gg-giver',
