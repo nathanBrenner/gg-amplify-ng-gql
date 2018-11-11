@@ -126,6 +126,25 @@
 				"TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/hosting/template.json",
 				"Parameters": {}
 			}
+		},
+		"apiggamplifynggql": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"Parameters": {
+					"AppSyncApiName": "ggamplifynggql",
+					"AuthCognitoUserPoolId": {
+						"Fn::GetAtt": [
+							"authcognito577b8664",
+							"Outputs.UserPoolId"
+						]
+					},
+					"schemaGraphql": "s3://ggamplifynggql-20181110154940-deployment/amplify-appsync-files/schema.graphql.1541899786328",
+					"ResolverBucket": "ggamplifynggql-20181110154940-deployment",
+					"ResolverRootKey": "amplify-appsync-files",
+					"DeploymentTimestamp": "1541899786328"
+				}
+			}
 		}
 	},
 	"Outputs": {

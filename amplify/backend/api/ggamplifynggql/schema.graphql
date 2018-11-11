@@ -1,0 +1,12 @@
+type Giver @model {
+  id: ID!
+  name: String!
+  exclude: String
+  assignedTo: Giver
+}
+
+type GiverGroup {
+  id: ID!
+  name: String!
+  givers: [Giver]
+}

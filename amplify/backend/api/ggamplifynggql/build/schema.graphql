@@ -1,0 +1,113 @@
+type Giver {
+  id: ID!
+  name: String!
+  exclude: String
+  assignedTo: Giver
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelGiverConnection {
+  items: [Giver]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelGiverFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  exclude: ModelStringFilterInput
+  and: [ModelGiverFilterInput]
+  or: [ModelGiverFilterInput]
+  not: ModelGiverFilterInput
+}
+
+type Query {
+  getGiver(id: ID!): Giver
+  listGivers(filter: ModelGiverFilterInput, limit: Int, nextToken: String): ModelGiverConnection
+}
+
+input CreateGiverInput {
+  id: ID
+  name: String!
+  exclude: String
+}
+
+input UpdateGiverInput {
+  id: ID!
+  name: String
+  exclude: String
+}
+
+input DeleteGiverInput {
+  id: ID
+}
+
+type Mutation {
+  createGiver(input: CreateGiverInput!): Giver
+  updateGiver(input: UpdateGiverInput!): Giver
+  deleteGiver(input: DeleteGiverInput!): Giver
+}
+
+type Subscription {
+  onCreateGiver: Giver @aws_subscribe(mutations: ["createGiver"])
+  onUpdateGiver: Giver @aws_subscribe(mutations: ["updateGiver"])
+  onDeleteGiver: Giver @aws_subscribe(mutations: ["deleteGiver"])
+}

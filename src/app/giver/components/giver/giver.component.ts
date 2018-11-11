@@ -6,7 +6,8 @@ import { AmplifyService } from 'aws-amplify-angular';
 import * as uuid from 'uuid/v4';
 import { Giver, GiverGroup } from 'src/app/giver';
 import { GiverService } from '../../services/giver.service';
-
+import { API, graphqlOperation } from 'aws-amplify';
+import { listGivers } from '../../../../graphql/queries.js';
 @Component({
   selector: 'gg-giver',
   templateUrl: './giver.component.html',
@@ -36,6 +37,22 @@ export class GiverComponent implements OnInit {
     this.giverGroupService.get().then(groups => {
       this.groups = groups;
     }).catch(console.error);
+    console.log('sdfsdf');
+    this.getStuff();
+  }
+
+  async getStuff() {
+    const ListEvents = `query ListGivers {
+      listGivers {
+        Giver {
+          name
+        }
+      }
+    }`;
+
+    console.log('fff')
+    const allEvents = await API.graphql(graphqlOperation(listGivers))
+    console.log('---', allEvents)
   }
 
   addGiver(giver: Giver): void {
