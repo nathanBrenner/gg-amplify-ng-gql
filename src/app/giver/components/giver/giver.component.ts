@@ -8,6 +8,7 @@ import { Giver, GiverGroup } from 'src/app/giver';
 import { GiverService } from '../../services/giver.service';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listGivers } from '../../../../graphql/queries.js';
+
 @Component({
   selector: 'gg-giver',
   templateUrl: './giver.component.html',
@@ -30,51 +31,57 @@ export class GiverComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.giverService.get().then(givers => {
-      this.givers = givers;
-    }).catch(console.error);
-
-    this.giverGroupService.get().then(groups => {
-      this.groups = groups;
-    }).catch(console.error);
-    console.log('sdfsdf');
-    this.getStuff();
+    this.getGivers();
+    this.getGiverGroups();
   }
 
-  async getStuff() {
-    const ListEvents = `query ListGivers {
-      listGivers {
-        Giver {
-          name
-        }
-      }
-    }`;
+  /**
+   * Giver CRUD
+   */
+  async deleteGiver(entity: Giver): Promise<void> {
+    const response = await this.giverService.delete(entity) as Giver;
 
-    console.log('fff')
-    const allEvents = await API.graphql(graphqlOperation(listGivers))
-    console.log('---', allEvents)
+    if (typeof response === 'string') {
+      this.showSnackbar(response);
+    }
+    this.givers = this.givers.filter(giver => giver.id !== entity.id);
+    this.showSnackbar(`Deleted ${entity.name}`);
   }
 
-  addGiver(giver: Giver): void {
-    this.giverService.post(giver).then(res => {
-      this.givers = [...this.givers, giver];
-      this.showSnackbar('Giver created');
-    }).catch(console.error);
+  async getGivers(): Promise<void> {
+    const givers = await this.giverService.get();
+
+    if (typeof givers === 'string') {
+      this.showSnackbar(givers);
+    }
+    this.showSnackbar('Givers loaded');
+    this.givers = givers as Giver[];
   }
 
-  assignGiver(giver: Giver, group: Giver[]): Giver {
-    group = group.filter(loopedGiver => loopedGiver.name !== giver.spouse && loopedGiver.name !== giver.name);
-    const randomNumber = Math.floor(Math.random() * group.length);
-    const assignedTo = group[randomNumber];
-    return { ...giver, assignedTo: assignedTo ? assignedTo : null };
+  async postGiver(entity: Giver) {
+    const response = await this.giverService.post(entity) as Giver;
+
+    if (typeof response === 'string') {
+      this.showSnackbar(response);
+    }
+    this.showSnackbar('Giver created');
+    this.givers = [...this.givers, response];
   }
 
-  deleteGiver(deletedGiver: Giver): void {
-    this.giverService.delete(deletedGiver).then(() => {
-      this.givers = this.givers.filter(giver => giver.id !== deletedGiver.id);
-      this.showSnackbar(`Deleted ${deletedGiver.name}`);
-    }).catch(console.error);
+  async putGiver(entity: Giver) {
+    const response = await this.giverService.put(entity) as Giver;
+
+    if (typeof response === 'string') {
+      this.showSnackbar(response);
+    }
+    this.showSnackbar(`${response.name} has been updated`);
+    this.givers = this.givers.map(giver => giver.id === response.id ? response : giver);
+    this.selectedGiver = null;
   }
+
+  /**
+   * GiverGroup CRUD
+   */
 
   deleteGiverGroup(deletedGiverGroup: GiverGroup): void {
     this.giverGroupService.delete(deletedGiverGroup).then(res => {
@@ -82,8 +89,10 @@ export class GiverComponent implements OnInit {
     }).catch(console.error);
   }
 
-  logout() {
-    this.amplifyService.auth().signOut().then(data => this.router.navigate(['/']));
+  getGiverGroups() {
+    this.giverGroupService.get().then(groups => {
+      this.groups = groups;
+    }).catch(console.error);
   }
 
   postGiverGroup(group: GiverGroup): void {
@@ -96,21 +105,6 @@ export class GiverComponent implements OnInit {
     this.giverGroupService.put(updatedGroup).then((res) => {
       this.groups = this.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group);
     }).catch(console.error);
-  }
-
-  randomizeGroup(giverGroup: Giver[]): Giver[] {
-    if (!(giverGroup.length  % 2)) {
-      let available = giverGroup;
-      return  giverGroup.map(giver => {
-        const updatedGiver = this.assignGiver(giver, available);
-        available = available.filter(availableGiver => {
-          return updatedGiver.assignedTo
-            ? availableGiver.id !== updatedGiver.assignedTo.id
-            : null;
-        });
-        return updatedGiver;
-      });
-    }
   }
 
   saveGroup({ name, givers, id }: { name: string, id?: string, givers: string[]}): void {
@@ -155,6 +149,28 @@ export class GiverComponent implements OnInit {
     }
   }
 
+  assignGiver(giver: Giver, group: Giver[]): Giver {
+    group = group.filter(loopedGiver => loopedGiver.name !== giver.exclude && loopedGiver.name !== giver.name);
+    const randomNumber = Math.floor(Math.random() * group.length);
+    const assignedTo = group[randomNumber];
+    return { ...giver, assignedTo: assignedTo ? assignedTo : null };
+  }
+
+  randomizeGroup(giverGroup: Giver[]): Giver[] {
+    if (!(giverGroup.length  % 2)) {
+      let available = giverGroup;
+      return  giverGroup.map(giver => {
+        const updatedGiver = this.assignGiver(giver, available);
+        available = available.filter(availableGiver => {
+          return updatedGiver.assignedTo
+            ? availableGiver.id !== updatedGiver.assignedTo.id
+            : null;
+        });
+        return updatedGiver;
+      });
+    }
+  }
+
   selectGiver(giver: Giver): void {
     this.selectedGiver = giver;
   }
@@ -174,15 +190,11 @@ export class GiverComponent implements OnInit {
     this.showGiverList = isVisible;
   }
 
-  updateGiver(updatedGiver: Giver): void {
-    this.giverService.put(updatedGiver).then(res => {
-      this.givers = this.givers.map(giver => giver.id === updatedGiver.id ? updatedGiver : giver);
-      this.showSnackbar(`${updatedGiver.name} has been updated`);
-      this.selectedGiver = null;
-    }).catch(console.error);
-  }
-
   updateGiverGroup(updatedGiverGroup: {id: string, name: string, givers: string[]}): void {
     this.saveGroup(updatedGiverGroup);
+  }
+
+  logout() {
+    this.amplifyService.auth().signOut().then(data => this.router.navigate(['/']));
   }
 }

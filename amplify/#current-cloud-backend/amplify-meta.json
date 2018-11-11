@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/auth/cognito577b8664-cloudformation-template.yml",
 				"logicalId": "authcognito577b8664"
 			},
-			"lastPushTimeStamp": "2018-11-11T01:32:04.116Z",
+			"lastPushTimeStamp": "2018-11-11T02:11:47.500Z",
 			"output": {
 				"AppClientSecret": "ucckijg8prllq5u6t6fl43u3nuthrts67i3mohv4co8s2igia6v",
 				"UserPoolId": "us-west-2_y9YVRrPtp",
@@ -38,7 +38,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-11-11T01:32:04.117Z",
+			"lastPushTimeStamp": "2018-11-11T02:11:47.501Z",
 			"output": {
 				"CloudFrontSecureURL": "https://d1l62ffnn2clel.cloudfront.net",
 				"S3BucketSecureURL": "https://ggamplifynggql-20181110162856--hostingbucket.s3.amazonaws.com",
@@ -68,8 +68,8 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiggamplifynggql"
 			},
-			"lastPushTimeStamp": "2018-11-11T01:32:04.928Z",
-			"lastPushDirHash": "YkH0SL03R0LYi84HwDob1xQaf+0="
+			"lastPushTimeStamp": "2018-11-11T02:11:48.051Z",
+			"lastPushDirHash": "hgdICIWvhs2pPiLC/U22AceNEzg="
 		}
 	}
 }

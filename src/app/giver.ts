@@ -1,7 +1,7 @@
 export interface Giver {
   id: string;
   name: string;
-  spouse: string;
+  exclude?: string;
   assignedTo?: Giver;
 }
 

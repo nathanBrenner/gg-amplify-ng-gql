@@ -52,7 +52,7 @@ export class GiverFormComponent implements OnInit, OnChanges {
   buildForm() {
     this.form = this.formBuilder.group({
       name: new FormControl('', Validators.required),
-      spouse: new FormControl('')
+      exclude: new FormControl('')
     });
   }
 
@@ -61,11 +61,11 @@ export class GiverFormComponent implements OnInit, OnChanges {
       const id = this.selectedGiver ? this.selectedGiver.id : uuid();
       const giver = { ...this.form.value, id };
       this.selectedGiver ? this.updateGiver.emit(giver) : this.saveGiver.emit(giver);
-      this.form.setValue({name: '', spouse: ''});
+      this.form.setValue({name: '', exclude: ''});
     }
   }
 
   setForm(): void {
-    this.form.setValue({name: this.selectedGiver.name, spouse: this.selectedGiver.spouse});
+    this.form.setValue({name: this.selectedGiver.name, exclude: this.selectedGiver.exclude});
   }
 }

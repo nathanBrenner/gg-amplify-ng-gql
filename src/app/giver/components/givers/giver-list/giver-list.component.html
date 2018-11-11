@@ -8,7 +8,7 @@
       <mat-icon>delete_outline</mat-icon>
     </span>
     <span mat-line class="giver-item">
-      Giver: {{giver.name}}<span *ngIf="giver.spouse">, spouse: {{giver.spouse}}</span>
+      Giver: {{giver.name}}<span *ngIf="giver.exclude">, exclude: {{giver.exclude}}</span>
     </span>
     <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
 

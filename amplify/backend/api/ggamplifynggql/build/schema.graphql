@@ -5,6 +5,12 @@ type Giver {
   assignedTo: Giver
 }
 
+type GiverGroup {
+  id: ID!
+  name: String!
+  givers: [Giver]
+}
+
 enum ModelSortDirection {
   ASC
   DESC
