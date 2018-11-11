@@ -88,6 +88,8 @@ input ModelGiverFilterInput {
 type Query {
   getGiver(id: ID!): Giver
   listGivers(filter: ModelGiverFilterInput, limit: Int, nextToken: String): ModelGiverConnection
+  getGiverGroup(id: ID!): GiverGroup
+  listGiverGroups(filter: ModelGiverGroupFilterInput, limit: Int, nextToken: String): ModelGiverGroupConnection
 }
 
 input CreateGiverInput {
@@ -110,10 +112,43 @@ type Mutation {
   createGiver(input: CreateGiverInput!): Giver
   updateGiver(input: UpdateGiverInput!): Giver
   deleteGiver(input: DeleteGiverInput!): Giver
+  createGiverGroup(input: CreateGiverGroupInput!): GiverGroup
+  updateGiverGroup(input: UpdateGiverGroupInput!): GiverGroup
+  deleteGiverGroup(input: DeleteGiverGroupInput!): GiverGroup
 }
 
 type Subscription {
   onCreateGiver: Giver @aws_subscribe(mutations: ["createGiver"])
   onUpdateGiver: Giver @aws_subscribe(mutations: ["updateGiver"])
   onDeleteGiver: Giver @aws_subscribe(mutations: ["deleteGiver"])
+  onCreateGiverGroup: GiverGroup @aws_subscribe(mutations: ["createGiverGroup"])
+  onUpdateGiverGroup: GiverGroup @aws_subscribe(mutations: ["updateGiverGroup"])
+  onDeleteGiverGroup: GiverGroup @aws_subscribe(mutations: ["deleteGiverGroup"])
+}
+
+type ModelGiverGroupConnection {
+  items: [GiverGroup]
+  nextToken: String
+}
+
+input ModelGiverGroupFilterInput {
+  id: ModelIDFilterInput
+  name: ModelStringFilterInput
+  and: [ModelGiverGroupFilterInput]
+  or: [ModelGiverGroupFilterInput]
+  not: ModelGiverGroupFilterInput
+}
+
+input CreateGiverGroupInput {
+  id: ID
+  name: String!
+}
+
+input UpdateGiverGroupInput {
+  id: ID!
+  name: String
+}
+
+input DeleteGiverGroupInput {
+  id: ID
 }

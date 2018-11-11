@@ -40,3 +40,54 @@ export const deleteGiver = `mutation DeleteGiver($input: DeleteGiverInput!) {
   }
 }
 `;
+export const createGiverGroup = `mutation CreateGiverGroup($input: CreateGiverGroupInput!) {
+  createGiverGroup(input: $input) {
+    id
+    name
+    givers {
+      id
+      name
+      exclude
+      assignedTo {
+        id
+        name
+        exclude
+      }
+    }
+  }
+}
+`;
+export const updateGiverGroup = `mutation UpdateGiverGroup($input: UpdateGiverGroupInput!) {
+  updateGiverGroup(input: $input) {
+    id
+    name
+    givers {
+      id
+      name
+      exclude
+      assignedTo {
+        id
+        name
+        exclude
+      }
+    }
+  }
+}
+`;
+export const deleteGiverGroup = `mutation DeleteGiverGroup($input: DeleteGiverGroupInput!) {
+  deleteGiverGroup(input: $input) {
+    id
+    name
+    givers {
+      id
+      name
+      exclude
+      assignedTo {
+        id
+        name
+        exclude
+      }
+    }
+  }
+}
+`;
