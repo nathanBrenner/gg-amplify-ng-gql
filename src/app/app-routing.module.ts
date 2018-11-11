@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'givers', loadChildren: './giver/giver.module#GiverModule' },
-  { path: '', redirectTo: '/givers', pathMatch: 'full' },
+  { path: 'login', loadChildren: './auth/auth.module#AuthModule' },
+  { path: '', loadChildren: './home/home.module#HomeModule' },
   { path: '**', redirectTo: '/givers' },
 ];
 

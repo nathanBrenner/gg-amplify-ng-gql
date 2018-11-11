@@ -1,14 +1,33 @@
 {
-    "providers": {
-        "awscloudformation": {
-            "AuthRoleName": "ggamplifynggql-20181110152637-authRole",
-            "UnauthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110152637-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110152637-authRole",
-            "Region": "us-west-2",
-            "DeploymentBucketName": "ggamplifynggql-20181110152637-deployment",
-            "UnauthRoleName": "ggamplifynggql-20181110152637-unauthRole",
-            "StackName": "ggamplifynggql-20181110152637",
-            "StackId": "arn:aws:cloudformation:us-west-2:019811773954:stack/ggamplifynggql-20181110152637/12618a10-e540-11e8-825d-0a976e703682"
-        }
-    }
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "ggamplifynggql-20181110154940-authRole",
+			"UnauthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110154940-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110154940-authRole",
+			"Region": "us-west-2",
+			"DeploymentBucketName": "ggamplifynggql-20181110154940-deployment",
+			"UnauthRoleName": "ggamplifynggql-20181110154940-unauthRole",
+			"StackName": "ggamplifynggql-20181110154940",
+			"StackId": "arn:aws:cloudformation:us-west-2:019811773954:stack/ggamplifynggql-20181110154940/4a6c6f30-e543-11e8-b2cf-064c426727f4"
+		}
+	},
+	"auth": {
+		"cognito577b8664": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/ggamplifynggql-20181110154940-deployment/amplify-cfn-templates/auth/cognito577b8664-cloudformation-template.yml",
+				"logicalId": "authcognito577b8664"
+			},
+			"lastPushTimeStamp": "2018-11-11T00:02:37.141Z",
+			"output": {
+				"AppClientSecret": "ucckijg8prllq5u6t6fl43u3nuthrts67i3mohv4co8s2igia6v",
+				"UserPoolId": "us-west-2_y9YVRrPtp",
+				"AppClientIDWeb": "3pqv48rc2rn8kdlhpajdtb0h9u",
+				"AppClientID": "1lufrjps8s14crkhv287uo0pvb",
+				"UserPoolName": "ggamplifynggql577b8664_userpool_577b8664"
+			},
+			"lastPushDirHash": "4epZvqhf3rJbyL5GZMO1RIamafU="
+		}
+	}
 }

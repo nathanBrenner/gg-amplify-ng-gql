@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { AmplifyService } from 'aws-amplify-angular';
 import * as uuid from 'uuid/v4';
+
 import { Giver, GiverGroup } from '../../../giver';
 import { GiverService, GiverGroupService } from '../../services';
 
@@ -21,6 +23,7 @@ export class GiverComponent implements OnInit {
   constructor(
     public snackBar: MatSnackBar,
     private router: Router,
+    public amplifyService: AmplifyService,
     private giverService: GiverService,
     private giverGroupService: GiverGroupService,
   ) {}
@@ -63,7 +66,7 @@ export class GiverComponent implements OnInit {
   }
 
   logout() {
-    // this.amplifyService.auth().signOut().then(data => this.router.navigate(['/']));
+    this.amplifyService.auth().signOut().then(data => this.router.navigate(['/']));
   }
 
   postGiverGroup(group: GiverGroup): void {

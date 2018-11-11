@@ -1,0 +1,49 @@
+{
+    "userPoolName": "ggamplifynggql516d407d_userpool_516d407d",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "roleName": "cognito516d407d_sns-role",
+    "roleExternalId": "cognito516d407d_role_external_id",
+    "policyName": "cognito516d407d-sns-policy",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "gift giver email verification",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+        "Requires Lowercase",
+        "Requires Uppercase",
+        "Requires Numbers",
+        "Requires Symbols"
+    ],
+    "requiredAttributes": [
+        "email"
+    ],
+    "userpoolClientName": "cognito516d407d_app_client",
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "mfaLambdaRole": "cognito516d407d_totp_lambda_role",
+    "mfaLambdaLogPolicy": "cognito516d407d_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "cognito516d407d_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "cognito516d407d_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "cognito516d407d_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "cognito516d407d_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "cognito516d407d_userpoolclient_lambda_iam_policy",
+    "userpoolClientSetAttributes": false,
+    "useDefault": "manual",
+    "authSelections": "userPoolOnly",
+    "resourceName": "cognito516d407d",
+    "unAuthRoleName": "ggamplifynggql-20181110152637-unauthRole",
+    "authRoleName": "ggamplifynggql-20181110152637-authRole",
+    "unAuthRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110152637-unauthRole",
+    "authRoleArn": "arn:aws:iam::019811773954:role/ggamplifynggql-20181110152637-authRole"
+}
