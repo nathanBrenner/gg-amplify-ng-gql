@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import components from './components';
-import { MatToolbarModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [...components],
@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material';
     CommonModule,
     HomeRoutingModule,
     MatToolbarModule,
+    MatButtonModule,
   ]
 })
 export class HomeModule { }

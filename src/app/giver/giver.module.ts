@@ -14,6 +14,8 @@ import {
   MatIconModule,
 } from '@angular/material';
 
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+
 import { DynamicFormModule } from '../dynamic-form/dynamic-form.module';
 
 import { GiverRoutingModule } from './giver-routing.module';
@@ -39,9 +41,11 @@ import Services from './services';
     MatSelectModule,
     MatSnackBarModule,
     MatIconModule,
+    AmplifyAngularModule
   ],
   providers: [
     ...Services,
+    AmplifyService,
   ]
 })
 export class GiverModule { }
