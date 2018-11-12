@@ -13,7 +13,7 @@ type Giver @model {
 type GiverGroup @model {
   id: ID!
   name: String!
-  givers: [Giver]
+  givers: [Giver]!
 }
 
 

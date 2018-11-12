@@ -1,15 +1,15 @@
 import { DeleteGiverReq, GetGiversReq, PostGiverReq, PutGiverReq } from './../../state/giver/actions';
-import { GiverGroupService } from '../../services/giver-group.service';
+import { GiverGroupService } from '../../state/giver-group/giver-group.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AmplifyService } from 'aws-amplify-angular';
 import * as uuid from 'uuid/v4';
 import { Giver, GiverGroup } from 'src/app/giver';
-import { GiverService } from '../../state/giver/giver.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { State } from '../../state/index';
+import { GetGiverGroupsReq, PostGiverGroupReq, PutGiverGroupReq, DeleteGiverGroupReq } from '../../state/giver-group/actions';
 
 @Component({
   selector: 'gg-giver',
@@ -19,7 +19,7 @@ import { State } from '../../state/index';
 export class GiverComponent implements OnInit {
   attempts = 0;
   givers$: Observable<Giver[]>;
-  groups: GiverGroup[] = [];
+  giverGroups$: Observable<GiverGroup[]>;
   selectedGiver: Giver;
   selectedGiverGroup: GiverGroup;
   showGiverList = false;
@@ -34,6 +34,7 @@ export class GiverComponent implements OnInit {
 
   ngOnInit() {
     this.givers$ = this.store$.pipe(select('giver'));
+    this.giverGroups$ = this.store$.pipe(select('giverGroup'));
     this.getGiverGroups();
     this.getGivers();
   }
@@ -65,34 +66,25 @@ export class GiverComponent implements OnInit {
    * GiverGroup CRUD
    */
 
-  deleteGiverGroup(deletedGiverGroup: GiverGroup): void {
-    this.giverGroupService.delete(deletedGiverGroup).then(res => {
-      this.groups = this.groups.filter(group => group.id !== deletedGiverGroup.id);
-    }).catch(console.error);
+  deleteGiverGroup(entity: GiverGroup): void {
+    this.store$.dispatch(new DeleteGiverGroupReq(entity));
   }
 
   getGiverGroups() {
-    this.giverGroupService.get().then(groups => {
-      this.groups = groups;
-    }).catch(console.error);
+    this.store$.dispatch(new GetGiverGroupsReq());
   }
 
   postGiverGroup(group: GiverGroup): void {
-    this.giverGroupService.post(group).then((res) => {
-      this.groups = [...this.groups, group];
-    }).catch(console.error);
+    this.store$.dispatch(new PostGiverGroupReq(group));
   }
 
-  putGiverGroup(updatedGroup: GiverGroup): void {
-    this.giverGroupService.put(updatedGroup).then((res) => {
-      this.groups = this.groups.map(group => group.id === updatedGroup.id ? updatedGroup : group);
-    }).catch(console.error);
+  putGiverGroup(entity: GiverGroup): void {
+    this.store$.dispatch(new PutGiverGroupReq(entity));
   }
 
-  saveGroup({ name, givers, id }: { name: string, id?: string, givers: string[]}): void {
+  saveGroup({ name, givers, id, currentGivers }: { name: string, id?: string, givers: string[], currentGivers: Giver[]}): void {
     // from the list of all givers, return a list of givers that have been selected to be in this new group
-    // const selectedGivers = this.givers.filter(giver => givers.includes(giver.id));
-    const selectedGivers = []; // replace later
+    const selectedGivers = currentGivers.filter(giver => givers.includes(giver.id));
 
     // if there are an even number of selected givers
     // (a group of odd number of givers would never assign every giver another giver, someone would be left out)
@@ -115,9 +107,6 @@ export class GiverComponent implements OnInit {
         // there are all unique pairs and fewer than 10 attempts to randomize givers with eachother
 
         // this should work for both update and add. If there was an id in the payload, update, otherwise add
-        // this.groups = id
-        //   ? this.groups.map(group => group.id === id ? { name, id, givers: newGroup } : group)
-        //   : [ ...this.groups, { name, id: uuid(), givers: newGroup }];
         id
           ? this.putGiverGroup({ name, id, givers: newGroup })
           : this.postGiverGroup({ name, id: uuid(), givers: newGroup });
@@ -125,7 +114,7 @@ export class GiverComponent implements OnInit {
         this.toggleGiverList(false);
         this.attempts = 0;
       } else if (this.attempts < 10) {
-        this.saveGroup({ name, givers });
+        this.saveGroup({ name, givers, currentGivers });
       }
     } else {
       this.showSnackbar('Unable to create group');
@@ -173,7 +162,7 @@ export class GiverComponent implements OnInit {
     this.showGiverList = isVisible;
   }
 
-  updateGiverGroup(updatedGiverGroup: {id: string, name: string, givers: string[]}): void {
+  updateGiverGroup(updatedGiverGroup: {id: string, name: string, givers: string[], currentGivers: Giver[]}): void {
     this.saveGroup(updatedGiverGroup);
   }
 

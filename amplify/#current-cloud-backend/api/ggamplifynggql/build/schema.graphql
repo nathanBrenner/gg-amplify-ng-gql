@@ -8,7 +8,7 @@ type Giver {
 type GiverGroup {
   id: ID!
   name: String!
-  givers: [Giver]
+  givers: [Giver]!
 }
 
 enum ModelSortDirection {

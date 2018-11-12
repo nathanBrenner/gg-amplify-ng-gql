@@ -48,11 +48,6 @@ export const createGiverGroup = `mutation CreateGiverGroup($input: CreateGiverGr
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }
@@ -65,11 +60,6 @@ export const updateGiverGroup = `mutation UpdateGiverGroup($input: UpdateGiverGr
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }
@@ -82,11 +72,6 @@ export const deleteGiverGroup = `mutation DeleteGiverGroup($input: DeleteGiverGr
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }

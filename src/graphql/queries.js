@@ -42,11 +42,6 @@ export const getGiverGroup = `query GetGiverGroup($id: ID!) {
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }
@@ -64,11 +59,6 @@ export const listGiverGroups = `query ListGiverGroups(
         id
         name
         exclude
-        assignedTo {
-          id
-          name
-          exclude
-        }
       }
     }
     nextToken

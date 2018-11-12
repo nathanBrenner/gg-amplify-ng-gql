@@ -15,10 +15,10 @@ export class GiverGroupFormComponent implements OnChanges {
   selectedGiverGroup: GiverGroup;
 
   @Output()
-  saveGroup: EventEmitter<{name: string, givers: string[]}> = new EventEmitter();
+  saveGroup: EventEmitter<{name: string, givers: string[], currentGivers: Giver[]}> = new EventEmitter();
 
   @Output()
-  updateGiverGroup: EventEmitter<{name: string, id: string, givers: string[]}> = new EventEmitter();
+  updateGiverGroup: EventEmitter<{name: string, id: string, givers: string[], currentGivers: Giver[]}> = new EventEmitter();
 
   questions: any[];
 
@@ -39,8 +39,8 @@ export class GiverGroupFormComponent implements OnChanges {
     } else {
       const givers = Object.keys(payload).filter(prop => prop !== 'name').filter(id => Boolean(payload[id]));
       this.selectedGiverGroup
-        ? this.updateGiverGroup.emit({ id: this.selectedGiverGroup.id, name: payload.name, givers})
-        : this.saveGroup.emit({ name: payload.name, givers });
+        ? this.updateGiverGroup.emit({ id: this.selectedGiverGroup.id, name: payload.name, givers, currentGivers: this.givers })
+        : this.saveGroup.emit({ name: payload.name, givers, currentGivers: this.givers });
     }
     this.questions = undefined;
   }

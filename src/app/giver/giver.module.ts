@@ -27,7 +27,7 @@ import { GiverGroupFormComponent } from './components/giver-groups/giver-group-f
 import { GiverGroupComponent } from './components/giver-groups/giver-group/giver-group.component';
 import { GiverComponent } from './components/giver/giver.component';
 import { GiverService } from './state/giver/giver.service';
-import { GiverGroupService } from './services/giver-group.service';
+import { GiverGroupService } from './state/giver-group/giver-group.service';
 
 import { GiverRoutingModule } from './giver-routing.module';
 

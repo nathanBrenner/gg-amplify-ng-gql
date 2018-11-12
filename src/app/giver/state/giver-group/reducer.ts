@@ -1,26 +1,26 @@
 import {
   Actions,
-  GET_GIVERS_RES,
-  POST_GIVER_RES,
-  PUT_GIVER_RES,
-  DELETE_GIVER_RES
+  GET_GIVER_GROUPS_RES,
+  POST_GIVER_GROUP_RES,
+  PUT_GIVER_GROUP_RES,
+  DELETE_GIVER_GROUP_RES
 } from './actions';
-import { Giver } from '../../../giver';
+import { GiverGroup } from '../../../giver';
 
-export function giverReducer(state: Giver[] = [], action: Actions): Giver[] {
+export function giverGroupReducer(state: GiverGroup[] = [], action: Actions): GiverGroup[] {
   switch (action.type) {
-    case GET_GIVERS_RES: {
+    case GET_GIVER_GROUPS_RES: {
       return [...state, ...action.payload];
     }
-    case POST_GIVER_RES: {
+    case POST_GIVER_GROUP_RES: {
       return [...state, action.payload];
     }
-    case PUT_GIVER_RES: {
+    case PUT_GIVER_GROUP_RES: {
       return state.map(giver =>
         giver.id === action.payload.id ? action.payload : giver
       );
     }
-    case DELETE_GIVER_RES: {
+    case DELETE_GIVER_GROUP_RES: {
       return state.filter(giver => giver.id !== action.payload.id);
     }
     default: {

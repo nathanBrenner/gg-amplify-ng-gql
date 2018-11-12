@@ -16,20 +16,17 @@ export class GiverService {
       .pipe(pluck('data', 'listGivers', 'items'));
   }
 
-  post(entity: Giver): Observable<Giver[]> {
+  post(entity: Giver): Observable<Giver> {
     return from(API.graphql(graphqlOperation(createGiver, { input: entity })))
       .pipe(pluck('data', 'createGiver'));
   }
 
-  put(entity: Giver): Observable<Giver[]> {
+  put(entity: Giver): Observable<Giver> {
     return from(API.graphql(graphqlOperation(updateGiver, { input: entity })))
       .pipe(pluck('data', 'updateGiver'));
   }
 
-  delete(entity: Giver): Observable<Giver[]> {
-    const giver = Object.keys(entity).reduce((current, prop) => {
-      return entity[prop] ? { ...current, [prop]: entity[prop] } : current;
-    }, {});
+  delete(entity: Giver): Observable<Giver> {
     return from(API.graphql(graphqlOperation(deleteGiver, { input: {id: entity.id } })))
       .pipe(pluck('data', 'deleteGiver'));
   }

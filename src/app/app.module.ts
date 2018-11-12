@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './giver/state';
 import { GiverEffects } from './giver/state/giver/effects';
+import { GiverGroupEffects } from './giver/state/giver-group/effects';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { GiverEffects } from './giver/state/giver/effects';
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([GiverEffects]),
+    EffectsModule.forRoot([GiverEffects, GiverGroupEffects]),
     StoreDevtoolsModule.instrument({}),
   ],
   providers: [],

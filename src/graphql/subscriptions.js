@@ -48,11 +48,6 @@ export const onCreateGiverGroup = `subscription OnCreateGiverGroup {
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }
@@ -65,11 +60,6 @@ export const onUpdateGiverGroup = `subscription OnUpdateGiverGroup {
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }
@@ -82,11 +72,6 @@ export const onDeleteGiverGroup = `subscription OnDeleteGiverGroup {
       id
       name
       exclude
-      assignedTo {
-        id
-        name
-        exclude
-      }
     }
   }
 }
