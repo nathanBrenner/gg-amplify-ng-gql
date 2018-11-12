@@ -1,8 +1,3 @@
-# type GiftGiver @model {
-#   givers: Giver
-#   giverGroups: GiverGroup
-# }
-
 type Giver @model {
   id: ID!
   name: String!
@@ -16,16 +11,3 @@ type GiverGroup @model {
   givers: [Giver]!
 }
 
-
-# type Giver @model {
-#   id: ID!
-#   name: String!
-#   exclude: String
-#   assignedTo: Giver
-# }
-
-# type GiverGroup {
-#   id: ID!
-#   name: String!
-#   givers: [Giver]
-# }
