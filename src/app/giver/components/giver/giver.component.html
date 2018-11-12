@@ -7,7 +7,7 @@
 <div class="givers-root">
 
   <gg-givers
-    [givers]="givers"
+    [givers]="givers$ | async"
     [selectedGiver]="selectedGiver"
     [showGiverList]="showGiverList"
     (deleteGiver)="deleteGiver($event)"
@@ -19,7 +19,7 @@
 
   <div>
     <gg-giver-groups
-      [givers]="givers"
+      [givers]="givers$ | async"
       [groups]="groups"
       [selectedGiverGroup]="selectedGiverGroup"
       [showGiverList]="showGiverList"

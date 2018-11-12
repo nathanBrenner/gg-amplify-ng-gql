@@ -46,7 +46,7 @@ export class GiverFormComponent implements OnInit, OnChanges {
   }
 
   canCreateGroup(): boolean {
-    return this.givers.length > 2 && !(this.givers.length % 2);
+    return this.givers && this.givers.length > 2 && !(this.givers.length % 2);
   }
 
   buildForm() {

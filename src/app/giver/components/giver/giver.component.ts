@@ -1,13 +1,15 @@
-import { GiverGroupService } from './../../services/giver-group.service';
+import { DeleteGiverReq, GetGiversReq, PostGiverReq, PutGiverReq } from './../../state/giver/actions';
+import { GiverGroupService } from '../../services/giver-group.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { AmplifyService } from 'aws-amplify-angular';
 import * as uuid from 'uuid/v4';
 import { Giver, GiverGroup } from 'src/app/giver';
-import { GiverService } from '../../services/giver.service';
-import { API, graphqlOperation } from 'aws-amplify';
-import { listGivers } from '../../../../graphql/queries.js';
+import { GiverService } from '../../state/giver/giver.service';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { State } from '../../state/index';
 
 @Component({
   selector: 'gg-giver',
@@ -16,7 +18,7 @@ import { listGivers } from '../../../../graphql/queries.js';
 })
 export class GiverComponent implements OnInit {
   attempts = 0;
-  givers: Giver[] = [];
+  givers$: Observable<Giver[]>;
   groups: GiverGroup[] = [];
   selectedGiver: Giver;
   selectedGiverGroup: GiverGroup;
@@ -26,56 +28,36 @@ export class GiverComponent implements OnInit {
     public snackBar: MatSnackBar,
     private router: Router,
     public amplifyService: AmplifyService,
-    private giverService: GiverService,
+    private store$: Store<State>,
     private giverGroupService: GiverGroupService,
   ) {}
 
   ngOnInit() {
-    this.getGivers();
+    this.givers$ = this.store$.pipe(select('giver'));
     this.getGiverGroups();
+    this.getGivers();
   }
 
   /**
    * Giver CRUD
    */
-  async deleteGiver(entity: Giver): Promise<void> {
-    const response = await this.giverService.delete(entity) as Giver;
-
-    if (typeof response === 'string') {
-      this.showSnackbar(response);
-    }
-    this.givers = this.givers.filter(giver => giver.id !== entity.id);
+  deleteGiver(entity: Giver): void {
+    this.store$.dispatch(new DeleteGiverReq(entity));
     this.showSnackbar(`Deleted ${entity.name}`);
   }
 
-  async getGivers(): Promise<void> {
-    const givers = await this.giverService.get();
-
-    if (typeof givers === 'string') {
-      this.showSnackbar(givers);
-    }
-    this.showSnackbar('Givers loaded');
-    this.givers = givers as Giver[];
+  getGivers(): void {
+    this.store$.dispatch(new GetGiversReq());
   }
 
-  async postGiver(entity: Giver) {
-    const response = await this.giverService.post(entity) as Giver;
-
-    if (typeof response === 'string') {
-      this.showSnackbar(response);
-    }
+  postGiver(entity: Giver): void {
+    this.store$.dispatch(new PostGiverReq(entity));
     this.showSnackbar('Giver created');
-    this.givers = [...this.givers, response];
   }
 
   async putGiver(entity: Giver) {
-    const response = await this.giverService.put(entity) as Giver;
-
-    if (typeof response === 'string') {
-      this.showSnackbar(response);
-    }
-    this.showSnackbar(`${response.name} has been updated`);
-    this.givers = this.givers.map(giver => giver.id === response.id ? response : giver);
+    this.store$.dispatch(new PutGiverReq(entity));
+    this.showSnackbar(`${entity.name} has been updated`);
     this.selectedGiver = null;
   }
 
@@ -109,7 +91,8 @@ export class GiverComponent implements OnInit {
 
   saveGroup({ name, givers, id }: { name: string, id?: string, givers: string[]}): void {
     // from the list of all givers, return a list of givers that have been selected to be in this new group
-    const selectedGivers = this.givers.filter(giver => givers.includes(giver.id));
+    // const selectedGivers = this.givers.filter(giver => givers.includes(giver.id));
+    const selectedGivers = []; // replace later
 
     // if there are an even number of selected givers
     // (a group of odd number of givers would never assign every giver another giver, someone would be left out)

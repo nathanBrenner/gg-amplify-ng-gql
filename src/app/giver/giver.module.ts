@@ -26,7 +26,7 @@ import { GiverGroupListComponent } from './components/giver-groups/giver-group-l
 import { GiverGroupFormComponent } from './components/giver-groups/giver-group-form/giver-group-form.component';
 import { GiverGroupComponent } from './components/giver-groups/giver-group/giver-group.component';
 import { GiverComponent } from './components/giver/giver.component';
-import { GiverService } from './services/giver.service';
+import { GiverService } from './state/giver/giver.service';
 import { GiverGroupService } from './services/giver-group.service';
 
 import { GiverRoutingModule } from './giver-routing.module';
@@ -56,7 +56,7 @@ import { GiverRoutingModule } from './giver-routing.module';
     MatSelectModule,
     MatSnackBarModule,
     MatIconModule,
-    AmplifyAngularModule
+    AmplifyAngularModule,
   ],
   providers: [
     GiverGroupService,

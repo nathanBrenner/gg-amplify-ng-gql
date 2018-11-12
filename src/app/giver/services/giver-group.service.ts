@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { GiverGroup } from '../../giver';
-import { Subject } from 'rxjs';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GiverGroupService {
-  private giverGroups: Subject<GiverGroup[]> = new Subject();
 
   get(): Promise<GiverGroup[]> {
     return new Promise((resolve, reject) => {
