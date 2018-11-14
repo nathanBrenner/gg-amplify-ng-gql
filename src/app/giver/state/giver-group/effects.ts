@@ -35,34 +35,37 @@ export class GiverGroupEffects {
   @Effect()
   postGiver$: Observable<Action> = this.actions$.pipe(
     ofType(POST_GIVER_GROUP_REQ),
-    mergeMap(({ payload }: PostGiverGroupReq) =>
-      this.giverGroupService.post(payload).pipe(
-        map((data: GiverGroup) => new PostGiverGroupRes(data)),
-        catchError((err) => of({ type: 'POST_GIVER_GROUP_FAILED', payload: err }))
-      )
-    )
+    map(({ payload }: PostGiverGroupReq) => new PostGiverGroupRes(payload))
+    // mergeMap(({ payload }: PostGiverGroupReq) =>
+    //   this.giverGroupService.post(payload).pipe(
+    //     map((data: GiverGroup) => new PostGiverGroupRes(data)),
+    //     catchError((err) => of({ type: 'POST_GIVER_GROUP_FAILED', payload: err }))
+    //   )
+    // )
   );
 
   @Effect()
   putGiver$: Observable<Action> = this.actions$.pipe(
     ofType(PUT_GIVER_GROUP_REQ),
-    mergeMap(({ payload }: PutGiverGroupReq) =>
-      this.giverGroupService.put(payload).pipe(
-        map((data: GiverGroup) => new PutGiverGroupRes(data)),
-        catchError((err) => of({ type: 'GUT_GIVER_GROUP_FAILED', payload: err }))
-      )
-    )
+    map(({ payload }: PutGiverGroupReq) => new PutGiverGroupRes(payload)),
+    // mergeMap(({ payload }: PutGiverGroupReq) =>
+    //   this.giverGroupService.put(payload).pipe(
+    //     map((data: GiverGroup) => new PutGiverGroupRes(data)),
+    //     catchError((err) => of({ type: 'GUT_GIVER_GROUP_FAILED', payload: err }))
+    //   )
+    // )
   );
 
   @Effect()
   deleteGiver$: Observable<Action> = this.actions$.pipe(
     ofType(DELETE_GIVER_GROUP_REQ),
-    mergeMap(({ payload }: DeleteGiverGroupReq) =>
-      this.giverGroupService.delete(payload).pipe(
-        map((data: GiverGroup) => new DeleteGiverGroupRes(data)),
-        catchError((err) => of({ type: 'DELETE_GIVER_FAILED', payload: err }))
-      )
-    )
+    map(({ payload }: DeleteGiverGroupReq) => new DeleteGiverGroupRes(payload)),
+    // mergeMap(({ payload }: DeleteGiverGroupReq) =>
+    //   this.giverGroupService.delete(payload).pipe(
+    //     map((data: GiverGroup) => new DeleteGiverGroupRes(data)),
+    //     catchError((err) => of({ type: 'DELETE_GIVER_FAILED', payload: err }))
+    //   )
+    // )
   );
 
   constructor(private giverGroupService: GiverGroupService, private actions$: Actions) {}
